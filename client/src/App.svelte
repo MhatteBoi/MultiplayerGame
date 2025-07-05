@@ -7,16 +7,29 @@
   let guess = '';
   let messages = [];
   let scores = {};
+  let zoom = 18.5; // Start zoomed in
+
+  
 
   onMount(() => {
     // Connect to the server
-    socket = io();
+    socket = io("http://localhost:3000");
+    
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('zoomUpdate', ({ zoomLevel }) => {
+    zoom = zoomLevel;
+    });
 
     // Listen for events from the server
-    socket.on('roundStart', (data) => {
-      image = data.image;
-      messages = [];  // clear previous messages
-    });
+  socket.on('roundStart', (data) => {
+    console.log('Received roundStart:', data); // Should show the image URL
+    image = data.image;
+    messages = [];
+    zoom = 18.5;
+  });
 
     socket.on('roundResult', (data) => {
       messages = [`${data.winner} guessed correctly! Answer: ${data.correctAnswer}`];
@@ -31,6 +44,8 @@
       // Optionally display a small notification for wrong guesses
       messages = [data.message];
     });
+
+
   });
 
   function submitGuess() {
@@ -39,13 +54,18 @@
       guess = '';
     }
   }
+
 </script>
 
 <main>
-  <h1>Guess the Character Part!</h1>
-  {#if image}
-    <img src={image} alt="Guess the character" style="max-width: 300px;"/>
-  {/if}
+  <h1>Guess the Character Part! Krille med sin pille, johan sitter på toan</h1>
+{#if image}
+  <div class="image-wrapper">
+    <img src={image} alt="Guess!" style="transform: scale({zoom});" />
+  </div>
+{:else}
+  <p>Loading image...</p>
+{/if}
   
   <div>
     <input bind:value={guess} placeholder="Your guess" on:keydown={(e) => e.key === 'Enter' && submitGuess()} />
@@ -69,6 +89,20 @@
 </main>
 
 <style>
+
+  .image-wrapper {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  img {
+    transition: transform 0.5s ease-out;
+    width: 100%;
+    height: auto;
+  }
+
   main {
     max-width: 600px;
     margin: auto;
