@@ -61,7 +61,7 @@
   }
 
 </script>
-
+<!-- add the modal to create a user name and then its testing time! -->
 <main>
   <div class="game-container">
     <div class="sidebar">
