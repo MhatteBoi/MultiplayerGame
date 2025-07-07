@@ -28,7 +28,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('https://res.cloudinary.com/dm3vmtten/image/upload/v1737192448/after-the-rain-8311416_1920_ykmlfg.jpg');
+  background-color: rgba(50, 0, 0, 0.4);
+  background-image: url('https://res.cloudinary.com/dm3vmtten/image/upload/v1751887944/game_background_bpiacu.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: darken;
 }
 
 h1 {
