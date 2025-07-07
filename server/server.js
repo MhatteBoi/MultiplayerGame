@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const express = require('express');
 const http = require('http');
 const helmet = require('helmet'); // for security headers
@@ -18,6 +21,13 @@ const io = new Server(server, {
 
   }
 });
+
+const rounds = JSON.parse(fs.readFileSync('./data/rounds.json', 'utf8'));
+
+const getRandomRound = () => {
+  const index = Math.floor(Math.random() * rounds.length);
+  return { round: rounds[index], index };
+};
 
 app.use(express.static('client/public'));  // serve your static frontend
 
@@ -47,18 +57,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Sample dataset: an array of game rounds with image URLs and answers
-const rounds = [
-  {
-    image: 'https://res.cloudinary.com/dm3vmtten/image/upload/v1751732186/00mXdkKDA8ubAKiLTL4v4BO-1_yfcxdr.webp', // place images under client/public/images
-    answer: 'Master Chief'
-  },
-  {
-    image: '/images/visor_fragment.jpg',
-    answer: 'Cortana'  // example; you can adjust based on available imagery
-  }
-  // Add more rounds as needed
-];
 
 // To store connected players and their scores
 let players = {};
@@ -67,17 +65,37 @@ let players = {};
 let currentRoundIndex = 0;
 let roundActive = false;
 let zoomInterval;
+let currentRound = rounds[0]; // Start with the first round
+
+// Move to next round (after a guess or timeout)
+function nextRound() {
+  roundActive = false;
+  let countdown = 3;
+  const countdownInterval = setInterval(() => {
+    io.emit('nextRoundIn', countdown);
+    countdown--;
+    if (countdown < 0) clearInterval(countdownInterval);
+  }, 1000);
+
+  setTimeout(startRound, 4000);
+  const { round } = getRandomRound();
+  currentRound = round;
+
+  setTimeout(startRound, 4000); // wait before starting new round
+}
 
 // Start a new round – send image to all players
 function startRound() {
-  if (currentRoundIndex >= rounds.length) currentRoundIndex = 0;
-  const currentRound = rounds[currentRoundIndex];
-
   roundActive = true;
-  io.emit('roundStart', { image: currentRound.image });
-  console.log(`Round started, answer is: ${currentRound.answer}, image: ${currentRound.image}`); // <-- Add image here
 
-  // Reset and start zoom effect for each round
+    const image = Array.isArray(currentRound.images)
+    ? currentRound.images[Math.floor(Math.random() * currentRound.images.length)]
+    : currentRound.image; // fallback if using old format
+
+    io.emit('roundStart', { image });
+  console.log(`Round started, answer is: ${currentRound.answers?.[0] || currentRound.answer}`);
+
+  // Reset and start zoom effect
   zoomLevel = 18.5;
   if (zoomInterval) clearInterval(zoomInterval);
   zoomInterval = setInterval(() => {
@@ -90,14 +108,11 @@ function startRound() {
   }, 200);
 }
 
-// Move to next round (after a guess or timeout)
-function nextRound() {
-  roundActive = false;
-  currentRoundIndex++;
-  setTimeout(startRound, 3000); // wait 3 seconds between rounds
-}
+
+
 
 io.on('connection', (socket) => {
+
   console.log('A user connected:', socket.id);
   // Initialize player's score
   if (!players[socket.id]) {
@@ -105,31 +120,43 @@ io.on('connection', (socket) => {
   }
   socket.emit('scoreUpdate', players);
 
+  socket.on('setName', (name) => {
+    players[socket.id].name = name || socket.id;
+    io.emit('scoreUpdate', players);
+  });
+
   // Send current image to new client if a round is active
-  if (roundActive) {
-    const currentRound = rounds[currentRoundIndex];
-    socket.emit('roundStart', { image: currentRound.image });
-  }
+if (roundActive && currentRound) {
+  socket.emit('roundStart', { image: currentRound.image });
+}
 
   // Handle player's guess
-  socket.on('guess', (guess) => {
-    const currentRound = rounds[currentRoundIndex];
-    if (!roundActive) return; // ignore if round is closed
+socket.on('guess', (guess) => {
+  if (!roundActive || !currentRound) return;
 
-    // Compare guess (simple case-insensitive match)
-    if (guess.trim().toLowerCase() === currentRound.answer.toLowerCase()) {
-      players[socket.id].score += 10;  // award points for correct guess
-      io.emit('roundResult', {
-        winner: players[socket.id].name,
-        correctAnswer: currentRound.answer,
-        scores: players
-      });
-      nextRound();
-    } else {
-      // Optionally, you can broadcast wrong guess notifications or handle them differently
-      socket.emit('wrongGuess', { message: 'Incorrect, try again!' });
-    }
-  });
+  const acceptedAnswers = currentRound.answers || [currentRound.answer];
+
+const matchedAnswer = acceptedAnswers.find(answer =>
+  guess.trim().toLowerCase() === answer.toLowerCase()
+);
+
+const isCorrect = Boolean(matchedAnswer);
+
+  if (isCorrect) {
+    players[socket.id].score += 10;
+
+    io.emit('roundResult', {
+      winner: players[socket.id].name,
+      correctAnswer: matchedAnswer,
+      scores: players
+    });
+
+    nextRound();
+  } else {
+    socket.emit('wrongGuess', { message: 'Incorrect, try again!' });
+  }
+});
+
 
   // Disconnect handling
   socket.on('disconnect', () => {
@@ -144,5 +171,7 @@ io.on('connection', (socket) => {
 // Start the first round when the server starts
 server.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
+    const { round } = getRandomRound();
+  currentRound = round;
   startRound();
 });

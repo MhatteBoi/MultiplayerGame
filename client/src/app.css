@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('https://res.cloudinary.com/dm3vmtten/image/upload/v1737192448/after-the-rain-8311416_1920_ykmlfg.jpg');
 }
 
 h1 {
