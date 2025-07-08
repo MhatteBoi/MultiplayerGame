@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 
 // To store connected players and their scores
 let players = {};
-
+const badWords = ['badword1', 'shit', 'fuck', 'bitch'];
 // Track current round index and if the round is open for guessing
 let currentRoundIndex = 0;
 let roundActive = false;
@@ -125,6 +125,24 @@ io.on('connection', (socket) => {
     io.emit('scoreUpdate', players);
   });
 
+  io.on('connection', (socket) => {
+  socket.on('setName', (name) => {
+    const cleanName = name.trim();
+
+    if (
+      cleanName.length === 0 ||
+      cleanName.length > 20 ||
+      badWords.some(word => cleanName.toLowerCase().includes(word))
+    ) {
+      socket.emit('invalidName', 'Invalid or inappropriate name.');
+      return;
+    }
+
+    // Save name to player
+    players[socket.id].name = cleanName;
+    console.log(`${socket.id} set name to ${cleanName}`);
+  });
+});
   // Send current image to new client if a round is active
 if (roundActive && currentRound) {
   socket.emit('roundStart', { image: currentRound.image });

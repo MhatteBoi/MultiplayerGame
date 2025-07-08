@@ -10,13 +10,26 @@
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808166/5a7516e5f092caad9d10323c81b7fed7_wypqih.jpg",
     "answer": "Cortana"
   },
-{
+  {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808171/Luigi_by_Shigehisa_Nakaue_lfqzpa.png",
     "answer": "Luigi"
   },
   {
+    "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/Cloud_Strife_from_FFVII_Rebirth_promo_render_u2ou4c.webp",
+    "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808171/Portrait.cloud_l20tvl.webp"],
+    "answers": ["Cloud", "Cloud Strife"]
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808168/Frank_West_29_gr9rpd.webp",
+    "answers": ["Frank" , "Frank West"]
+  },
+  {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808170/Knuckles_9_iey3ya.webp",
     "answer": "Knuckles"
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/Clank_vtac3n.webp",
+    "answer": "Clank"
   }
 ]
  
