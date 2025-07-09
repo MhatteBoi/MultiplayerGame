@@ -119,7 +119,6 @@ io.on('connection', (socket) => {
     players[socket.id] = { score: 0, name: socket.id };
   }
   socket.emit('scoreUpdate', players);
-
   socket.on('setName', (name) => {
     players[socket.id].name = name || socket.id;
     io.emit('scoreUpdate', players);

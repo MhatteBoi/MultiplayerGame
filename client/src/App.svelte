@@ -128,7 +128,7 @@ function submitName() {
   </div>
 
   {#if messages.length}
-    <div>
+    <div class="win-lose-message">
       {#each messages as message}
         <p>{message}</p>
       {/each}
@@ -142,6 +142,19 @@ function submitName() {
 
 <style>
 
+.win-lose-message{
+  font-size: 1.4rem;
+  color: #ffb347;
+  text-shadow: 2px 2px 8px #232526, 0 0 10px #ffb34755;
+  margin: 1rem 0;
+  padding: 1rem 1rem;
+  border-radius: 14px;
+  background: rgb(41, 40, 40, 0.85);
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 12px #ffb34722;
+  
+}
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -187,7 +200,7 @@ function submitName() {
   margin-bottom: 1.2rem;
   padding: 1rem 2rem;
   border-radius: 14px;
-  background: linear-gradient(90deg, rgba(20, 89, 66, 0.85), rgba(255,179,71,0.15));
+  background: linear-gradient(90deg, rgba(20, 89, 66, 0.85), rgba(15, 82, 98, 0.65));
   animation: pulse 1s infinite alternate;
   font-weight: bold;
   letter-spacing: 0.04em;
@@ -268,7 +281,7 @@ ul{
   .image-wrapper {
     width: 100%;
     max-width: 420px;
-    aspect-ratio: 1/1;
+    height: 420px;
     overflow: hidden;
     margin: 1.5rem auto 1rem auto;
     border-radius: 18px;
@@ -288,7 +301,7 @@ ul{
     transition: transform 0.5s cubic-bezier(.4,2,.3,1), box-shadow 0.3s;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 16px;
     box-shadow: 0 2px 16px rgba(255,179,71,0.08);
   }

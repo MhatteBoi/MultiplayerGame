@@ -15,7 +15,8 @@
     "answer": "Luigi"
   },
   {
-    "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/Cloud_Strife_from_FFVII_Rebirth_promo_render_u2ou4c.webp",
+    "images": [
+    "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/Cloud_Strife_from_FFVII_Rebirth_promo_render_u2ou4c.webp",
     "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808171/Portrait.cloud_l20tvl.webp"],
     "answers": ["Cloud", "Cloud Strife"]
   },
@@ -26,6 +27,23 @@
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808170/Knuckles_9_iey3ya.webp",
     "answer": "Knuckles"
+  },
+   {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/char_sp_ti1g0u.png",
+    "answers": ["Akuma", "Gouki"]
+  },
+     {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808171/Ratchet_1_nt4tmc.webp",
+    "answer": "Ratchet" 
+  },
+       {
+    "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1752047802/oot-featured-scaled_i7rg2s.jpg", 
+               "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808168/images_p85uv7.jpg","https://res.cloudinary.com/dm3vmtten/image/upload/v1752047801/Link_ssbu_mwqtap.webp"],
+    "answer": "Link" 
+  },
+        {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808169/images_r4znlu.webp",
+    "answers": ["Mario", "Super Mario"]
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/Clank_vtac3n.webp",
