@@ -1,4 +1,5 @@
 <script>
+  import { flip } from 'svelte/animate';
   import { onMount } from 'svelte';
   import { io } from 'socket.io-client';
 
@@ -19,7 +20,7 @@ function submitName() {
     return;
   }
 
-  if (["shit", "fuck", "bitch"].some(word => trimmed.toLowerCase().includes(word))) {
+  if (["shit", "fuck", "bitch", "cock", "pussy"].some(word => trimmed.toLowerCase().includes(word))) {
     errorMsg = 'Please choose a more appropriate name.';
     return;
   }
@@ -49,6 +50,7 @@ function submitName() {
     countdown = seconds;
   });
 
+  
     socket.on('zoomUpdate', ({ zoomLevel }) => {
     zoom = zoomLevel;
     });
@@ -85,6 +87,10 @@ function submitName() {
     }
   }
 
+  $: sortedPlayers = Object
+  .entries(scores)
+  .sort(([, a], [, b]) => b.score - a.score);
+
 </script>
 <!-- add the modal to create a user name and then its testing time! -->
 <main>
@@ -99,14 +105,18 @@ function submitName() {
       </div>
     </div>
     {/if}
-    <div class="sidebar">
-    <h3>Players</h3>
-    <ul>
-      {#each Object.entries(scores) as [id, player]}
-        <li>{player.name}: {player.score}</li>
-      {/each}
-    </ul>
-  </div>
+<div class="sidebar">
+  <h3>Players</h3>
+  <ul >
+    {#each sortedPlayers as [id, player], i(id)}
+      <li animate:flip 
+       class={`player-item ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}`}>
+        <span>{player.name || 'Anonymous'}</span>
+        <span>{player.score}</span>
+      </li>
+    {/each}
+  </ul>
+</div>
   <div class="main-content">
   {#if countdown !== null}
   <div class="countdown">Next round in: {countdown}</div>
@@ -141,6 +151,8 @@ function submitName() {
 </main>
 
 <style>
+
+
 
 .win-lose-message{
   font-size: 1.4rem;
@@ -273,6 +285,40 @@ ul{
   font-weight: 500;
   font-size: 0.9rem;
   transition: background 0.2s, color 0.2s;
+}
+
+.player-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 0.5rem;
+  background-color: #222;
+  transition: transform 0.2s;
+}
+
+.player-item.gold {
+  border: gold 1px solid;
+  background-image: linear-gradient(90deg, rgba(240, 231, 47, 0.669), rgba(13, 93, 190, 0.992));
+  padding:15px;
+  font-size: 1.17rem;
+  text-shadow: #222 2px 2px 4px;
+  font-weight: bold;
+  transform: scale(1.07);
+}
+
+.player-item.silver {
+  border: silver 1px solid;
+  font-size: 1.01rem;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.player-item.bronze {
+  border: #6c4118 1px solid;
+  font-size: 1.01rem;
+  font-weight: bold;
+  transform: scale(1.03);
 }
 .sidebar li:hover {
   background: rgba(255,179,71,0.13);

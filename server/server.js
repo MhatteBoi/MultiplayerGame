@@ -116,11 +116,11 @@ io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
   // Initialize player's score
   if (!players[socket.id]) {
-    players[socket.id] = { score: 0, name: socket.id };
+    players[socket.id] = { score: 0, name: "Anonymous" };
   }
   socket.emit('scoreUpdate', players);
   socket.on('setName', (name) => {
-    players[socket.id].name = name || socket.id;
+    players[socket.id].name = name.trim() || "Anonymous";
     io.emit('scoreUpdate', players);
   });
 
