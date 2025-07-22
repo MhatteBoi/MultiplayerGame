@@ -43,7 +43,7 @@ function submitName() {
     socket = io("http://localhost:3000");
     
     socket.on('connect', () => {
-      console.log('Connected to server');
+     // console.log('Connected to server');
     });
 
     socket.on('nextRoundIn', (seconds) => {
@@ -57,7 +57,7 @@ function submitName() {
 
     // Listen for events from the server
   socket.on('roundStart', (data) => {
-    console.log('Received roundStart:', data); // Should show the image URL
+   // console.log('Received roundStart:', data); // Should show the image URL
     image = data.image;
     messages = [];
     zoom = 18.5;
@@ -203,20 +203,18 @@ function submitName() {
   align-items: center;
   justify-items: center;
 }
-
-/* make a count down that is a bit fun and fits a gaming guessing game */
 .countdown {
   font-size: 2rem;
-  color: #ffb347;
-  text-shadow: 2px 2px 8px #232526, 0 0 10px #ffb34755;
+  color: #ffffff;
+  text-shadow: 2px 2px px #232526, 0 0 10px #ffb34755;
   margin-bottom: 1.2rem;
   padding: 1rem 2rem;
   border-radius: 14px;
-  background: linear-gradient(90deg, rgba(20, 89, 66, 0.85), rgba(15, 82, 98, 0.65));
+  background: linear-gradient(90deg, rgba(40, 44, 42, 0.85), rgba(22, 22, 22, 0.85));
   animation: pulse 1s infinite alternate;
   font-weight: bold;
   letter-spacing: 0.04em;
-  box-shadow: 0 2px 12px #ffb34722;
+  box-shadow: 0 2px 12px #05097e22;
   border: 1.5px solid #ffb34755;
   transition: box-shadow 0.2s, background 0.2s;
 }

@@ -47,16 +47,9 @@ app.use(
     },
     frameguard: { action: 'deny' },
     xssFilter: true,
-    hidePoweredBy: false,
+    hidePoweredBy: true,
   })
 );
-
-// Override or add custom headers
-app.use((req, res, next) => {
-  res.setHeader('X-Powered-By', 'Multiplayer Game Server'); // override Helmet's default
-  next();
-});
-
 
 // To store connected players and their scores
 let players = {};
@@ -66,6 +59,7 @@ let currentRoundIndex = 0;
 let roundActive = false;
 let zoomInterval;
 let currentRound = rounds[0]; // Start with the first round
+let currentImage = null;
 
 // Move to next round (after a guess or timeout)
 function nextRound() {
@@ -77,7 +71,6 @@ function nextRound() {
     if (countdown < 0) clearInterval(countdownInterval);
   }, 1000);
 
-  setTimeout(startRound, 4000);
   const { round } = getRandomRound();
   currentRound = round;
 
@@ -87,13 +80,11 @@ function nextRound() {
 // Start a new round – send image to all players
 function startRound() {
   roundActive = true;
-
-    const image = Array.isArray(currentRound.images)
+  currentImage = Array.isArray(currentRound.images)
     ? currentRound.images[Math.floor(Math.random() * currentRound.images.length)]
-    : currentRound.image; // fallback if using old format
-
-    io.emit('roundStart', { image });
-  console.log(`Round started, answer is: ${currentRound.answers?.[0] || currentRound.answer}`);
+    : currentRound.image;
+  io.emit('roundStart', { image: currentImage });
+  // console.log(`Round started, answer is: ${currentRound.answers?.[0] || currentRound.answer}`);
 
   // Reset and start zoom effect
   zoomLevel = 18.5;
@@ -113,38 +104,30 @@ function startRound() {
 
 io.on('connection', (socket) => {
 
-  console.log('A user connected:', socket.id);
+  //console.log('A user connected:', socket.id);
   // Initialize player's score
   if (!players[socket.id]) {
     players[socket.id] = { score: 0, name: "Anonymous" };
   }
-  socket.emit('scoreUpdate', players);
-  socket.on('setName', (name) => {
-    players[socket.id].name = name.trim() || "Anonymous";
-    io.emit('scoreUpdate', players);
-  });
+socket.on('setName', (name) => {
+  const cleanName = name.trim();
 
-  io.on('connection', (socket) => {
-  socket.on('setName', (name) => {
-    const cleanName = name.trim();
+  if (
+    cleanName.length === 0 ||
+    cleanName.length > 20 ||
+    badWords.some(word => cleanName.toLowerCase().includes(word))
+  ) {
+    socket.emit('invalidName', 'Invalid or inappropriate name.');
+    return;
+  }
 
-    if (
-      cleanName.length === 0 ||
-      cleanName.length > 20 ||
-      badWords.some(word => cleanName.toLowerCase().includes(word))
-    ) {
-      socket.emit('invalidName', 'Invalid or inappropriate name.');
-      return;
-    }
-
-    // Save name to player
-    players[socket.id].name = cleanName;
-    console.log(`${socket.id} set name to ${cleanName}`);
-  });
+  players[socket.id].name = cleanName;
+  io.emit('scoreUpdate', players);
 });
+
   // Send current image to new client if a round is active
 if (roundActive && currentRound) {
-  socket.emit('roundStart', { image: currentRound.image });
+  socket.emit('roundStart', { image: currentImage, zoomLevel });
 }
 
   // Handle player's guess
@@ -177,7 +160,7 @@ const isCorrect = Boolean(matchedAnswer);
 
   // Disconnect handling
   socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
+    //console.log('User disconnected:', socket.id);
     delete players[socket.id];
     io.emit('scoreUpdate', players);
   });
@@ -187,7 +170,7 @@ const isCorrect = Boolean(matchedAnswer);
 
 // Start the first round when the server starts
 server.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+ // console.log('Server running on http://localhost:3000');
     const { round } = getRandomRound();
   currentRound = round;
   startRound();

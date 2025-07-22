@@ -4,7 +4,7 @@
         "https://res.cloudinary.com/dm3vmtten/image/upload/v1751732186/00mXdkKDA8ubAKiLTL4v4BO-1_yfcxdr.webp", 
         "https://res.cloudinary.com/dm3vmtten/image/upload/v1751874658/HInf_Coverart_Large_No_Logo_s9cm3v.jpg",
         "https://res.cloudinary.com/dm3vmtten/image/upload/v1751874657/mnn4iaciwpq91_xsevd7.jpg"],
-    "answers": ["Master Chief", "Spartan 117", "Jon"]
+    "answers": ["Master Chief", "Spartan 117"]
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808166/5a7516e5f092caad9d10323c81b7fed7_wypqih.jpg",
@@ -18,11 +18,11 @@
     "images": [
     "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808167/Cloud_Strife_from_FFVII_Rebirth_promo_render_u2ou4c.webp",
     "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808171/Portrait.cloud_l20tvl.webp"],
-    "answers": ["Cloud", "Cloud Strife"]
+    "answer":  "Cloud Strife"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808168/Frank_West_29_gr9rpd.webp",
-    "answers": ["Frank" , "Frank West"]
+    "answer":  "Frank West"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808170/Knuckles_9_iey3ya.webp",
@@ -43,7 +43,7 @@
   },
         {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808169/images_r4znlu.webp",
-    "answers": ["Mario", "Super Mario"]
+    "answer": "Super Mario"
   },
           {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1751808171/maxime-thomas-le-deore-snake-mgs2_khqcyt.jpg",
@@ -63,7 +63,7 @@
   },
       {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090696/RYU_ewvyms.jpg",
-    "answers": ["Ryu Hyabusa", "Ryu", "Hyabusa"]
+    "answers": ["Ryu Hyabusa", "Hyabusa"]
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090694/Geralt_stuff_jsw6ht.webp",
@@ -79,20 +79,20 @@
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090683/3061198-arthur_portrait_transparent_jwba0v.png",
-    "answers": ["Arthur Morgan", "Arthur"]
+    "answer": "Arthur Morgan"
   },
   {
     "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1753090695/LaraCroftInfobox_tnc2t7.png"
               ,"https://res.cloudinary.com/dm3vmtten/image/upload/v1753090698/TombRaiderLaraCroft2024Image_pahwmp.jpg"],
-    "answers": ["Lara Croft", "Lara"]
+    "answer": "Lara Croft"
   },
   {
-    "inmage": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090681/1b1b8ba1e75e385347a2e532f3808d58_splzuc.jpg",
-    "answers": ["Nathan Drake", "Drake", "Nathan"]
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090681/1b1b8ba1e75e385347a2e532f3808d58_splzuc.jpg",
+    "answers": ["Nathan Drake", "Nathan"]
   },
   {
     "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1753090697/Samus_Aran_q3nkz6.png","https://res.cloudinary.com/dm3vmtten/image/upload/v1753090697/Zero_Suit_Samus_q8yngl.png"],
-    "answers": ["Samus", "Samus Aran"]
+    "answer": "Samus Aran"
   },
   {
     "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1753090682/63768c4111fd25a6e6d9987465cb9f4d-ns_hxhsy9.png",
@@ -109,7 +109,7 @@
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090694/Gordon2004_hdujxt.webp",
-    "answers": ["Gordon Freeman", "Gordon"]
+    "answer": "Gordon Freeman"
   },
     {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090686/download_1_curpb5.jpg",
@@ -125,11 +125,11 @@
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090682/Ac_2_ezio_l23a7c.webp",
-    "answers": ["Ezio", "Ezio Auditore", "Aduitore"]
+    "answer":  "Ezio Auditore"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090681/19f4454e89941d691c1123d825db67ce_q0291h.jpg",
-    "answers": ["Jin", "Jin Kazama"]
+    "answer":  "Jin Kazama"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090687/download_2_xvqbt7.jpg",
@@ -149,11 +149,11 @@
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090687/DMC3Dante_psssys.webp",
-    "answers": ["Dante", "Dante Sparda"]
+    "answer":  "Dante Sparda"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753091689/Crash_1_Crash_Bandicoot_mnnwxm.webp",
-    "answers": ["Crash Bandicoot", "Crash"]
+    "answer": "Crash Bandicoot"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090688/download_5_ykacwh.jpg",
@@ -169,7 +169,7 @@
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090690/download_8_g2pjau.jpg",
-    "answers": ["Fox McCloud", "Fox"]
+    "answer": "Fox McCloud"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090690/download_9_x4cpdi.jpg",
@@ -181,7 +181,7 @@
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090692/download_11_eq5ce3.jpg",
-    "answers": ["Princess Peach", "Peach"]
+    "answer": "Princess Peach"
   }
 ]
  
