@@ -13,7 +13,11 @@ const io = new Server(server, {
   cors: {
     //add 2 origin servers to allow CORS
     // this is for development; adjust for production
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: [
+    "https://multiplayergame-1-epqg.onrender.com",
+    "https://your-frontend-name.onrender.com",
+    "http://localhost:5173" // for dev
+  ],
     // match your Vite dev server
     methods: ["GET", "POST" ],
     allowedHeaders: ["Content-Type"],

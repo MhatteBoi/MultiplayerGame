@@ -40,7 +40,7 @@ function submitName() {
 
   onMount(() => {
     // Connect to the server
-    socket = io("http://localhost:3000");
+    socket = io("https://multiplayergame-uwhs.onrender.com");
     
     socket.on('connect', () => {
      // console.log('Connected to server');
