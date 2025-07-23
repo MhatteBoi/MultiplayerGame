@@ -60,7 +60,7 @@ function submitName() {
    // console.log('Received roundStart:', data); // Should show the image URL
     image = data.image;
     messages = [];
-    zoom = 18.5;
+    zoom = data.zoomLevel ?? 18.5; 
   });
 
     socket.on('roundResult', (data) => {

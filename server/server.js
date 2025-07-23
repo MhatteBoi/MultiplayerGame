@@ -16,7 +16,8 @@ const io = new Server(server, {
     origin: [
     "https://multiplayergame-1-epqg.onrender.com",
     "https://your-frontend-name.onrender.com",
-    "http://localhost:5173" // for dev
+    "http://localhost:5173",
+    "http://localhost:5174"  // for dev
   ],
     // match your Vite dev server
     methods: ["GET", "POST" ],
@@ -62,6 +63,7 @@ const badWords = ['badword1', 'shit', 'fuck', 'bitch'];
 let currentRoundIndex = 0;
 let roundActive = false;
 let zoomInterval;
+let zoomLevel;
 let currentRound = rounds[0]; // Start with the first round
 let currentImage = null;
 
@@ -87,20 +89,24 @@ function startRound() {
   currentImage = Array.isArray(currentRound.images)
     ? currentRound.images[Math.floor(Math.random() * currentRound.images.length)]
     : currentRound.image;
-  io.emit('roundStart', { image: currentImage });
+    zoomLevel = 18.5;
+  io.emit('roundStart', { image: currentImage, zoomLevel });
   // console.log(`Round started, answer is: ${currentRound.answers?.[0] || currentRound.answer}`);
 
   // Reset and start zoom effect
-  zoomLevel = 18.5;
-  if (zoomInterval) clearInterval(zoomInterval);
-  zoomInterval = setInterval(() => {
-    if (zoomLevel > 1) {
-      zoomLevel -= 0.3;
+  
+zoomInterval = setInterval(() => {
+  if (zoomLevel > 1) {
+    zoomLevel -= 0.3;
+    if (zoomLevel <= 1) {
+      zoomLevel = 1; // Clamp to exactly 1
       io.emit('zoomUpdate', { zoomLevel });
-    } else {
       clearInterval(zoomInterval);
+    } else {
+      io.emit('zoomUpdate', { zoomLevel });
     }
-  }, 200);
+  }
+}, 200);
 }
 
 
