@@ -105,18 +105,18 @@ function submitName() {
       </div>
     </div>
     {/if}
-<div class="sidebar">
-  <h3>Players</h3>
-  <ul >
-    {#each sortedPlayers as [id, player], i(id)}
-      <li animate:flip 
-       class={`player-item ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}`}>
-        <span>{player.name || 'Anonymous'}</span>
-        <span>{player.score}</span>
-      </li>
-    {/each}
-  </ul>
-</div>
+  <div class="sidebar">
+    <h3>Players</h3>
+    <ul >
+      {#each sortedPlayers as [id, player], i(id)}
+        <li animate:flip 
+        class={`player-item ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}`}>
+          <span>{player.name || 'Anonymous'}</span>
+          <span>{player.score}</span>
+        </li>
+      {/each}
+    </ul>
+  </div>
   <div class="main-content">
   {#if countdown !== null}
   <div class="countdown">Next round in: {countdown}</div>
@@ -183,13 +183,19 @@ function submitName() {
 
 .modal-content {
   background: rgb(85, 84, 84);
-  padding: 2rem;
+  padding: 1.2rem 1rem;
   border-radius: 12px;
   text-align: center;
   width: 300px;
+  max-width: 95vw;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   font-family: sans-serif;
   color: #ef940a;
+}
+
+.modal-content h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
 }
 
 .error {
@@ -197,11 +203,10 @@ function submitName() {
   font-size: 0.9rem;
 }
 .game-container {
-  width: 60svw;
+  width: 60vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  justify-items: center;
 }
 .countdown {
   font-size: 2rem;
@@ -229,6 +234,17 @@ function submitName() {
     font-size: 1.3rem;
     padding: 0.5rem 0.7rem;
     border-radius: 10px;
+  }
+    .modal-content {
+    width: 95vw;
+    padding: 0.8rem 0.3rem;
+  }
+  .modal-content h2 {
+    font-size: 1.1rem;
+  }
+  .modal-content button {
+    font-size: 1rem;
+    padding: 0.5em 1.2em;
   }
 }
 .main-content {
@@ -355,10 +371,11 @@ ul{
     backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
     width: 100%;
-    margin: auto;
+    overflow-x:hidden;
     text-align: center;
+      transform: translateX(0px);
     font-family: sans-serif;
   }
   h1 {
@@ -383,10 +400,10 @@ ul{
   border: none;
   background: #232526;
   color: #ffb347;
-  font-size: 1.1em;
+  font-size: 1em;
   outline: 2px solid #ffb34733;
   transition: outline 0.2s, box-shadow 0.2s;
-  width: 220px;
+  width: 180px;
   max-width: 80vw;
   box-shadow: 0 2px 8px #ffb34722;
 }
@@ -402,7 +419,7 @@ button {
   border: none;
   border-radius: 8px;
   padding: 0.7em 2em;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 2px 8px #ffb34733;
@@ -417,9 +434,62 @@ button:hover {
 }
 
   @media (max-width: 600px) {
-  .image-wrapper {
-    max-width: 95vw;
+    input[type="text"] {
+    padding: 0.5em;
+    font-size: 0.95em;
+    width: 90%;
+    max-width: 90vw;
+  }
+
+  main{
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-30px);
+    overflow-x:hidden;
+  }
+  button {
+    padding: 0.5em 1em;
+    font-size: 0.95em;
+  }
+  
+    .game-container {
+    max-width: 100%;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .main-content{
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    align-items: center;
+    margin: 0 auto;
+  }
+    .modal-content {
+    width: 90vw;
+    padding: 1.2rem 0.5rem;
+  }
+  .sidebar {
+    order: 2;
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    margin-bottom: 0.5rem;
+    height: auto;
+    padding: 1rem 0.5rem;
     border-radius: 10px;
+    box-sizing: border-box;
+  }  .image-wrapper {
+    max-width: 95vw;
+    height: 48vw;
+    min-height: 180px;
+    border-radius: 10px;
+  }
+  h1 {
+    font-size: 1.1rem;
   }
 }
 </style>
