@@ -86,6 +86,31 @@ function nextRound() {
 // Start a new round – send image to all players
 function startRound() {
   roundActive = true;
+
+  let answerCountdown = 15;
+  let answerRevealed = false;
+
+  io.emit('answerCountdown', answerCountdown);
+
+  const answerCountdownInterval = setInterval(() => {
+    answerCountdown--;
+    io.emit('answerCountdown', answerCountdown);
+    if (answerCountdown <= 0) {
+      clearInterval(answerCountdownInterval);
+      answerRevealed = true;
+      // Reveal the answer, but do NOT call nextRound yet!
+      io.emit('roundResult', {
+        winner: null,
+        correctAnswer: currentRound.answers?.[0] || currentRound.answer,
+        scores: players,
+        timeout: true
+      });
+      // roundActive stays true, so guesses are still accepted
+    }
+  }, 1000);
+
+
+  
   currentImage = Array.isArray(currentRound.images)
     ? currentRound.images[Math.floor(Math.random() * currentRound.images.length)]
     : currentRound.image;
@@ -107,6 +132,8 @@ zoomInterval = setInterval(() => {
     }
   }
 }, 200);
+
+global.answerRevealed = false;
 }
 
 
@@ -145,23 +172,25 @@ socket.on('guess', (guess) => {
   if (!roundActive || !currentRound) return;
 
   const acceptedAnswers = currentRound.answers || [currentRound.answer];
-
-const matchedAnswer = acceptedAnswers.find(answer =>
-  guess.trim().toLowerCase() === answer.toLowerCase()
-);
-
-const isCorrect = Boolean(matchedAnswer);
+  const matchedAnswer = acceptedAnswers.find(answer =>
+    guess.trim().toLowerCase() === answer.toLowerCase()
+  );
+  const isCorrect = Boolean(matchedAnswer);
 
   if (isCorrect) {
     players[socket.id].score += 10;
-
     io.emit('roundResult', {
       winner: players[socket.id].name,
       correctAnswer: matchedAnswer,
       scores: players
     });
 
-    nextRound();
+    // Only restart if the answer has been revealed
+    if (global.answerRevealed) {
+      roundActive = false;
+      nextRound();
+    }
+    // If not revealed, you can choose to reveal immediately or keep the round going
   } else {
     socket.emit('wrongGuess', { message: 'Incorrect, try again!' });
   }

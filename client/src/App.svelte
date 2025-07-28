@@ -36,7 +36,7 @@ function submitName() {
   let scores = {};
   let zoom = 18.5; // Start zoomed in
   let countdown = null;
-
+  let answerCountdown = null;
 
   onMount(() => {
     // Connect to the server
@@ -50,6 +50,9 @@ function submitName() {
     countdown = seconds;
   });
 
+  socket.on('answerCountdown', (seconds) => {
+  answerCountdown = seconds;
+});
   
     socket.on('zoomUpdate', ({ zoomLevel }) => {
     zoom = zoomLevel;
@@ -107,6 +110,7 @@ function submitName() {
     {/if}
   <div class="sidebar">
     <h3>Players</h3>
+    <p>Debug: {answerCountdown}</p>
     <ul >
       {#each sortedPlayers as [id, player], i(id)}
         <li animate:flip 
@@ -120,6 +124,7 @@ function submitName() {
   <div class="main-content">
   {#if countdown !== null}
   <div class="countdown">Next round in: {countdown}</div>
+
 {/if}
   <h1>Guess the Character!</h1>
 
@@ -131,10 +136,22 @@ function submitName() {
 {:else}
   <p>Loading image...</p>
 {/if}
+
+<div>
+{#if answerCountdown !== null}
+  <div class="countdown-timer">
+    Answer revealed in: <span>{answerCountdown}</span> seconds
+  </div>
+{/if}
+
+</div>
+
+
   
   <div>
     <input bind:value={guess} placeholder="Your guess" on:keydown={(e) => e.key === 'Enter' && submitGuess()} />
     <button on:click={submitGuess}>Submit</button>
+    
   </div>
 
   {#if messages.length}
@@ -153,7 +170,20 @@ function submitName() {
 <style>
 
 
-
+.countdown-timer {
+  font-size: 1.5rem;
+  color: #ffb347;
+  background: rgba(40, 44, 42, 0.85);
+  padding: 0.7em 1.2em;
+  z-index: 1000;
+  border-radius: 12px;
+  border: 2px solid red;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 12px #ffb34722;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, box-shadow 0.2s;
+}
 .win-lose-message{
   font-size: 1.4rem;
   color: #ffb347;
