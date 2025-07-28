@@ -95,16 +95,16 @@ function startRound() {
   const answerCountdownInterval = setInterval(() => {
     answerCountdown--;
     io.emit('answerCountdown', answerCountdown);
-    if (answerCountdown <= 0) {
-      clearInterval(answerCountdownInterval);
-      answerRevealed = true;
-      // Reveal the answer, but do NOT call nextRound yet!
-      io.emit('roundResult', {
-        winner: null,
-        correctAnswer: currentRound.answers?.[0] || currentRound.answer,
-        scores: players,
-        timeout: true
-      });
+if (answerCountdown <= 0) {
+  clearInterval(answerCountdownInterval);
+  global.answerRevealed = true;
+  // Reveal the answer, but do NOT call nextRound yet!
+  io.emit('roundResult', {
+    winner: null,
+    correctAnswer: currentRound.answers?.[0] || currentRound.answer,
+    scores: players,
+    timeout: true
+  });
       // roundActive stays true, so guesses are still accepted
     }
   }, 1000);
@@ -178,18 +178,16 @@ socket.on('guess', (guess) => {
   const isCorrect = Boolean(matchedAnswer);
 
   if (isCorrect) {
-    players[socket.id].score += 10;
-    io.emit('roundResult', {
-      winner: players[socket.id].name,
-      correctAnswer: matchedAnswer,
-      scores: players
-    });
-
-    // Only restart if the answer has been revealed
-    if (global.answerRevealed) {
-      roundActive = false;
-      nextRound();
-    }
+if (isCorrect) {
+  players[socket.id].score += 10;
+  io.emit('roundResult', {
+    winner: players[socket.id].name,
+    correctAnswer: matchedAnswer,
+    scores: players
+  });
+  roundActive = false; // End the round
+  nextRound();         // Start the next round
+}
     // If not revealed, you can choose to reveal immediately or keep the round going
   } else {
     socket.emit('wrongGuess', { message: 'Incorrect, try again!' });

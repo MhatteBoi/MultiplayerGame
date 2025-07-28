@@ -177,7 +177,6 @@ function submitName() {
   padding: 0.7em 1.2em;
   z-index: 1000;
   border-radius: 12px;
-  border: 2px solid red;
   margin-bottom: 1rem;
   font-weight: bold;
   box-shadow: 0 2px 12px #ffb34722;
