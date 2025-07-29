@@ -107,7 +107,7 @@ function startRound() {
       io.emit('roundResult', {
         correctAnswer: currentRound.answers?.[0] || currentRound.answer
       });
-      nextRound();
+      
     }
   }, 1000);
 

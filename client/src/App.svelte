@@ -37,6 +37,7 @@ function submitName() {
   let zoom = 18.5; // Start zoomed in
   let countdown = null;
  let answerCountdown = null;
+  let answerReveal = ''; // Store the correct answer for display
 
   onMount(() => {
     // Connect to the server
@@ -63,15 +64,11 @@ function submitName() {
     zoom = data.zoomLevel ?? 18.5; 
   });
 
-    socket.on('roundResult', ({ correctAnswer, winner }) => {
-      if (winner) {
-        messages.push(`${winner} guessed correctly!`);
-      } else {
-        messages.push(`Time's up! The correct answer was: ${correctAnswer}`);
-      }
-      answerCountdown = null; // reset countdown after answer reveal
+    socket.on('roundResult', (data) => {
+      messages = [`${data.winner} guessed correctly! Answer: ${data.correctAnswer}`];
+      scores = data.scores;
+      answerReveal = data.correctAnswer; // Store the correct answer for display
     });
-  
 
     socket.on('answerCountdown', (seconds) => {
       answerCountdown = seconds;
@@ -140,15 +137,14 @@ function submitName() {
 {:else}
   <p>Loading image...</p>
 {/if}
-
 <!-- Get the answer reveal to work! -->
 {#if answerCountdown > 0}
   <div class="countdown-timer">
     Answer revealed in: <span>{answerCountdown}</span> seconds
   </div>
-{:else if answerCountdown === 0}
+  {:else if answerCountdown === 0}
   <div class="countdown-timer">
-    Revealing answer now...
+    <span>{answerReveal}</span>
   </div>
 {/if}
 
