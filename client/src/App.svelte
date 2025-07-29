@@ -36,7 +36,7 @@ function submitName() {
   let scores = {};
   let zoom = 18.5; // Start zoomed in
   let countdown = null;
-
+ let answerCountdown = null;
 
   onMount(() => {
     // Connect to the server
@@ -63,9 +63,18 @@ function submitName() {
     zoom = data.zoomLevel ?? 18.5; 
   });
 
-    socket.on('roundResult', (data) => {
-      messages = [`${data.winner} guessed correctly! Answer: ${data.correctAnswer}`];
-      scores = data.scores;
+    socket.on('roundResult', ({ correctAnswer, winner }) => {
+      if (winner) {
+        messages.push(`${winner} guessed correctly!`);
+      } else {
+        messages.push(`Time's up! The correct answer was: ${correctAnswer}`);
+      }
+      answerCountdown = null; // reset countdown after answer reveal
+    });
+  
+
+    socket.on('answerCountdown', (seconds) => {
+      answerCountdown = seconds;
     });
 
     socket.on('scoreUpdate', (data) => {
@@ -131,7 +140,18 @@ function submitName() {
 {:else}
   <p>Loading image...</p>
 {/if}
-  
+
+<!-- Get the answer reveal to work! -->
+{#if answerCountdown > 0}
+  <div class="countdown-timer">
+    Answer revealed in: <span>{answerCountdown}</span> seconds
+  </div>
+{:else if answerCountdown === 0}
+  <div class="countdown-timer">
+    Revealing answer now...
+  </div>
+{/if}
+
   <div>
     <input bind:value={guess} placeholder="Your guess" on:keydown={(e) => e.key === 'Enter' && submitGuess()} />
     <button on:click={submitGuess}>Submit</button>

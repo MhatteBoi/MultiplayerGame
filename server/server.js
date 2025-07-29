@@ -67,6 +67,10 @@ let zoomLevel;
 let currentRound = rounds[0]; // Start with the first round
 let currentImage = null;
 
+let answerRevealInterval = null;
+let answerCountdownInterval = null;
+let countdownSeconds = 15;
+
 // Move to next round (after a guess or timeout)
 function nextRound() {
   roundActive = false;
@@ -86,6 +90,29 @@ function nextRound() {
 // Start a new round – send image to all players
 function startRound() {
   roundActive = true;
+
+  let answerCountdown = 15;
+  io.emit('answerCountdown', answerCountdown);
+
+  // Clear any old countdown
+  clearInterval(answerCountdownInterval);
+
+  // Start countdown timer
+  answerCountdownInterval = setInterval(() => {
+    answerCountdown--;
+    io.emit('answerCountdown', answerCountdown);
+    if (answerCountdown <= 0) {
+      clearInterval(answerCountdownInterval);
+      roundActive = false;
+      io.emit('roundResult', {
+        correctAnswer: currentRound.answers?.[0] || currentRound.answer
+      });
+      nextRound();
+    }
+  }, 1000);
+
+
+
   currentImage = Array.isArray(currentRound.images)
     ? currentRound.images[Math.floor(Math.random() * currentRound.images.length)]
     : currentRound.image;
@@ -153,6 +180,8 @@ const matchedAnswer = acceptedAnswers.find(answer =>
 const isCorrect = Boolean(matchedAnswer);
 
   if (isCorrect) {
+    clearInterval(answerCountdownInterval); // STOP reveal countdown
+    roundActive = false;
     players[socket.id].score += 10;
 
     io.emit('roundResult', {
