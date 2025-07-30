@@ -142,14 +142,15 @@ function submitName() {
 {/if}
 
 <!-- Get the answer reveal to work! -->
-{#if answerCountdown !== null && !answerRevealed}
+{#if answerCountdown > 0}
   <div class="countdown-timer">
     Answer revealed in: <span>{answerCountdown}</span> seconds
   </div>
+  
 {/if}
 
 {#if answerRevealed}
-  <div class="revealed-answer">
+  <div class="countdown-timer">
     🔍 The answer is: <strong>{revealedAnswer}</strong>
   </div>
 {/if}
