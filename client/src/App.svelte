@@ -70,6 +70,9 @@ function submitName() {
       
       messages = [`${data.winner} guessed correctly! Answer: ${data.correctAnswer}`];
       scores = data.scores;
+      answerRevealed = true;
+      revealedAnswer = data.correctAnswer;
+      answerCountdown = null; 
     });
 
     socket.on('answerCountdown', (seconds) => {
@@ -146,10 +149,7 @@ function submitName() {
   <div class="countdown-timer">
     Answer revealed in: <span>{answerCountdown}</span> seconds
   </div>
-  
-{/if}
-
-{#if answerRevealed}
+{:else if answerRevealed}
   <div class="countdown-timer">
     🔍 The answer is: <strong>{revealedAnswer}</strong>
   </div>
