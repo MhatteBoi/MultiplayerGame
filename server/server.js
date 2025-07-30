@@ -75,8 +75,7 @@ function nextRound() {
     if (countdown < 0) clearInterval(countdownInterval);
   }, 1000);
 
-  const { round } = getRandomRound();
-  currentRound = round;
+
 
   setTimeout(startRound, 4000); // wait before starting new round
 }
@@ -86,6 +85,10 @@ function startRound() {
   roundActive = true;
   answerRevealed = false;
   revealedAnswer = null;
+
+    const { round } = getRandomRound();
+  currentRound = round;
+
   let answerCountdown = 15;
   io.emit("answerCountdown", answerCountdown);
 
