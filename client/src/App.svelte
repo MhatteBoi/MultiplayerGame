@@ -37,6 +37,9 @@ function submitName() {
   let zoom = 18.5; // Start zoomed in
   let countdown = null;
 
+  let answerCountdown = null;
+  let answerRevealed = false;
+  let revealedAnswer = null;
 
   onMount(() => {
     // Connect to the server
@@ -64,12 +67,14 @@ function submitName() {
   });
 
     socket.on('roundResult', (data) => {
+      
       messages = [`${data.winner} guessed correctly! Answer: ${data.correctAnswer}`];
       scores = data.scores;
     });
 
     socket.on('answerCountdown', (seconds) => {
       answerCountdown = seconds;
+
     });
 
     socket.on('scoreUpdate', (data) => {
@@ -137,9 +142,15 @@ function submitName() {
 {/if}
 
 <!-- Get the answer reveal to work! -->
-  {#if answerCountdown !== null}
+{#if answerCountdown !== null && !answerRevealed}
   <div class="countdown-timer">
     Answer revealed in: <span>{answerCountdown}</span> seconds
+  </div>
+{/if}
+
+{#if answerRevealed}
+  <div class="revealed-answer">
+    🔍 The answer is: <strong>{revealedAnswer}</strong>
   </div>
 {/if}
 
