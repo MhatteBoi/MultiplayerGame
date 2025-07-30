@@ -98,8 +98,9 @@ function startRound() {
     if (answerCountdown <= 0) {
       clearInterval(answerCountdownInterval);
       answerRevealed = true;
+      const revealAnswer = currentRound.answers?.[0] || currentRound.answer;
       io.emit("roundResult", {
-        correctAnswer: currentRound.answers?.[0] || currentRound.answer,
+        correctAnswer: revealAnswer,
       });
     }
   }, 1000);
