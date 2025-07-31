@@ -91,7 +91,8 @@
     "answers": ["Nathan Drake", "Nathan"]
   },
   {
-    "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1753090697/Samus_Aran_q3nkz6.png","https://res.cloudinary.com/dm3vmtten/image/upload/v1753090697/Zero_Suit_Samus_q8yngl.png"],
+    "images": ["https://res.cloudinary.com/dm3vmtten/image/upload/v1753090697/Samus_Aran_q3nkz6.png",
+               "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090697/Zero_Suit_Samus_q8yngl.png"],
     "answer": "Samus Aran"
   },
   {
@@ -178,6 +179,38 @@
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090691/download_10_npegze.jpg",
     "answer": "Wario"
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959164/nina_williams_reuqdj.jpg",
+    "answer": "Nina Williams"
+  },
+    {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959164/Spyro_PS1_original_ne3eip.webp",
+    "answers": ["Spyro the Dragon", "Spyro"]
+  },
+      {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959164/Doomguy-strikes-a-pose_n36lwn.avif",
+    "answers": ["DoomGuy", "Doom Guy", "Doom Slayer"]
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959164/Ken_Masters__SF3_-_Third_Strike_vqiw1o.png",
+    "answer": "Ken Masters"
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959165/King_Tekken_8_lunma5.webp",
+    "answer": "King"
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959165/Paul_Phoenix_aa0rgl.webp",
+    "answer": "Paul Phoenix"
+  },
+    {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959165/Paul_Phoenix_aa0rgl.webp",
+    "answers": ["Agent 47", "Agent-47", "Agent47"]
+  },
+  {
+    "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753959166/rodrigo-rosseeuw-pyramidhex-000_fqapwm.jpg",
+    "answer": "Pyramid Head"
   },
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090692/download_11_eq5ce3.jpg",
