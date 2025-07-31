@@ -28,10 +28,7 @@ const io = new Server(server, {
 
 const rounds = JSON.parse(fs.readFileSync("./data/rounds.json", "utf8"));
 
-const getRandomRound = () => {
-  const index = Math.floor(Math.random() * rounds.length);
-  return { round: rounds[index], index };
-};
+
 
 app.use(express.static("client/public")); // serve your static frontend
 
@@ -80,6 +77,11 @@ function nextRound() {
   setTimeout(startRound, 4000); // wait before starting new round
 }
 
+const getRandomRound = () => {
+  const index = Math.floor(Math.random() * rounds.length);
+  return { round: rounds[index], index };
+};
+
 // Start a new round – send image to all players
 function startRound() {
   roundActive = true;
@@ -99,9 +101,6 @@ function startRound() {
     if (answerCountdown <= 0) {
       clearInterval(answerCountdownInterval);
       answerRevealed = true;
-      io.emit("roundResult", {
-        correctAnswer: currentAnswer,
-      });
     }
   }, 1000);
 
@@ -111,7 +110,7 @@ function startRound() {
     ]
     : currentRound.image;
   zoomLevel = 18.5;
-  io.emit("roundStart", { image: currentImage, zoomLevel });
+  io.emit("roundStart", { image: currentImage, zoomLevel, correctAnswer: currentAnswer });
   // console.log(`Round started, answer is: ${currentRound.answers?.[0] || currentRound.answer}`);
 
   // Reset and start zoom effect
