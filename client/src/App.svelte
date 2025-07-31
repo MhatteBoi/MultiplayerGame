@@ -64,6 +64,7 @@ function submitName() {
     image = data.image;
     messages = [];
     zoom = data.zoomLevel ?? 18.5; 
+    revealedAnswer = data.revealedAnswer || null; // Use the new revealedAnswer
   });
 
     socket.on('roundResult', (data) => {
@@ -71,7 +72,6 @@ function submitName() {
       messages = [`${data.winner} guessed correctly! Answer: ${data.correctAnswer}`];
       scores = data.scores;
       answerRevealed = true;
-      revealedAnswer = data.correctAnswer;
       answerCountdown = null; 
     });
 
