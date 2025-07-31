@@ -87,7 +87,7 @@ function startRound() {
   answerRevealed = false;
   
   
-  let answerCountdown = 15;
+  let answerCountdown = 20;
   io.emit("answerCountdown", answerCountdown);
 
   const answerCountdownInterval = setInterval(() => {
