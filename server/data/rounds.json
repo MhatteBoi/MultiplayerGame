@@ -215,6 +215,162 @@
   {
     "image": "https://res.cloudinary.com/dm3vmtten/image/upload/v1753090692/download_11_eq5ce3.jpg",
     "answer": "Princess Peach"
+  },
+    {
+    "image": "https://static.wikia.nocookie.net/katamari/images/7/70/Prince.PNG",
+    "answer": "The Prince"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/theworldendswithyou/images/5/5c/Neku_Sak.png",
+    "answer": "Neku Sakuraba"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/earthbound/images/e/e9/Ness_Sprite.gif",
+    "answer": "Ness"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/ghosttrick/images/3/3d/Sissel_Artwork.png",
+    "answer": "Sissel"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/psychonauts/images/0/08/Razputin_%282%29.png",
+    "answers": ["Razputin 'Raz' Aquato", "Raz Aquato"]
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/valkyria/images/7/76/Welkin_Gunther.png",
+    "answer": "Welkin Gunther "
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/oxenfree/images/5/53/Alexr.png",
+    "answer": "Alex"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/zeroescape/images/1/18/Junpei_Sprite.png",
+    "answer": "Junpei"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/undertale/images/d/d5/Papyrus.png",
+    "answer": "Papyrus"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/finalfantasy/images/4/45/Terra_Bray.png",
+    "answer": "Terra Branford "
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/cave_story/images/8/89/Quote_Cave_Story.png",
+    "answer": "Quote"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/blazblue/images/a/a1/Rachel_Alucard.png",
+    "answer": "Rachel Alucard"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/puyo/images/4/4c/Arle_Nadja_Puyo.png",
+    "answer": "Arle Nadja"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/chrono/images/0/0b/Frog_Chrono_Trigger.png",
+    "answer": "Frog "
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/shadowhearts/images/f/f5/Yuri_Hyuga.png",
+    "answer": "Yuri Hyuga "
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/vagrantstory/images/3/30/Ashley_riot.png",
+    "answer": "Ashley Riot"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/ghosttrick/images/9/92/Inspector_Cabanela.png",
+    "answer": "Inspector Cabanela"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/yuppiepsycho/images/8/8c/Brian_Pasternak.png",
+    "answer": "Brian Pasternack"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/anodyne/images/a/a1/Young.png",
+    "answer": "Young"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/offgame/images/6/6f/The_Batter.png",
+    "answer": "The Batter"
+  },
+    {
+    "image": "https://static.wikia.nocookie.net/hades_gamepedia_en/images/3/36/Zagreus.png",
+    "answer": "Zagreus"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/controlgame/images/3/3f/Jesse_Faden_Portrait.png",
+    "answer": "Jesse Faden"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/kidsnextdoorfanfiction/images/7/77/Amicia.png",
+    "answers": ["Amicia de Rune", "Amicia Rune"]
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/outerwilds_gamepedia/images/8/87/Feldspar_3.png",
+    "answer": "Feldspar"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/hollowknight/images/f/fd/Hornet.png",
+    "answer": "Hornet"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/neo-versus/images/1/12/Sam_Porter_Bridges.jpg",
+    "answers": ["Sam Porter Bridges", "Sam Porter"]
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/dontstarve/images/9/9c/Wendy_Portrait.png",
+    "answer": "Wendy"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/persona5/images/3/38/Futaba_Sakura.png",
+    "answer": "Futaba Sakura"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/lis_gamepedia_en/images/3/34/Chloe_Price_LiS_2.png",
+    "answer": "Chloe Price"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/controlgame/images/9/9b/Ahti.png",
+    "answer": "Ahti"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/pyre_gamepedia/images/c/cc/Tariq.png",
+    "answer": "Tariq"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/undertale/images/3/3b/Undyne_character.png",
+    "answer": "Undyne"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/obradinn/images/0/01/Henry_Evans_Obra_Dinn.png",
+    "answer": "Henry Evans"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/tunicgame/images/6/69/Fox_Tunic.png",
+    "answer": "The Fox"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/a-short-hike/images/5/5a/Claire_sprite.png",
+    "answer": "Claire"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/hitman/images/5/57/Lucas_Grey.png",
+    "answer": "Lucas Grey"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/outerworlds/images/f/f2/Parvati_Holcomb.png",
+    "answer": "Parvati Holcomb"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/discoelysium/images/6/6e/Klaasje_Disco_Elysium.png",
+    "answer": "Klaasje"
+  },
+  {
+    "image": "https://static.wikia.nocookie.net/celeste_gamepedia/images/3/32/MadelineRender_-_TransparentBG.png",
+    "answer": "Madeline"
   }
 ]
  
