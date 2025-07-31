@@ -85,7 +85,7 @@ function nextRound() {
 function startRound() {
   roundActive = true;
   answerRevealed = false;
-  revealedAnswer = null;
+  
   
   let answerCountdown = 15;
   io.emit("answerCountdown", answerCountdown);
@@ -107,8 +107,10 @@ function startRound() {
     Math.floor(Math.random() * currentRound.images.length)
     ]
     : currentRound.image;
+
+  revealedAnswer = currentRound.answers?.[0] || currentRound.answer;
   zoomLevel = 18.5;
-  io.emit("roundStart", { image: currentImage, zoomLevel });
+  io.emit("roundStart", { image: currentImage, zoomLevel, revealedAnswer });
   // console.log(`Round started, answer is: ${currentRound.answers?.[0] || currentRound.answer}`);
 
   // Reset and start zoom effect
