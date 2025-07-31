@@ -75,6 +75,7 @@ function submitName() {
       answerCountdown = null; 
     });
 
+    // 👉 Save the correct answer at the start of each round — not when it ends.
     socket.on('answerCountdown', (seconds) => {
       answerCountdown = seconds;
 

@@ -85,9 +85,10 @@ function startRound() {
   roundActive = true;
   answerRevealed = false;
   revealedAnswer = null;
-
-    const { round } = getRandomRound();
+  
+  const { round } = getRandomRound();
   currentRound = round;
+  currentAnswer = currentRound.answers?.[0] || currentRound.answer;
 
   let answerCountdown = 15;
   io.emit("answerCountdown", answerCountdown);
@@ -98,9 +99,8 @@ function startRound() {
     if (answerCountdown <= 0) {
       clearInterval(answerCountdownInterval);
       answerRevealed = true;
-      const revealAnswer = currentRound.answers?.[0] || currentRound.answer;
       io.emit("roundResult", {
-        correctAnswer: revealAnswer,
+        correctAnswer: currentAnswer,
       });
     }
   }, 1000);
