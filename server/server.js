@@ -96,9 +96,6 @@ function startRound() {
     if (answerCountdown <= 0) {
       clearInterval(answerCountdownInterval);
       answerRevealed = true;
-      io.emit("roundResult", {
-        correctAnswer: currentRound.answers?.[0] || currentRound.answer,
-      });
     }
   }, 1000);
 
